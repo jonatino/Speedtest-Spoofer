@@ -1,5 +1,32 @@
+/**
+ *  The MIT License (MIT)
+ * 	
+ *  Copyright (c) 2014 Jonathan Beaudoin
+ *	
+ *	Permission is hereby granted, free of charge, to any person obtaining a copy
+ *	of this software and associated documentation files (the "Software"), to deal
+ *	in the Software without restriction, including without limitation the rights
+ *	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *	copies of the Software, and to permit persons to whom the Software is
+ *	furnished to do so, subject to the following conditions:
+ *	
+ *	The above copyright notice and this permission notice shall be included in all
+ *	copies or substantial portions of the Software.
+ *	
+ *	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *	SOFTWARE.
+ */
 package beaudoin.apps.http;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -8,30 +35,35 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 import beaudoin.apps.utils.Utils;
 
-import javax.swing.JLabel;
-
-import java.awt.FlowLayout;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
-
+/**
+ * 
+ * @author Jonathan
+ * @since March 14th, 2014
+ */
 public class SpeedTestRequest {
 
+	/**
+	 * Variables used throughout the class
+	 */
 	private String download;
 	private String upload;
 	private String ping;
 	private int serverId;
 
+	/**
+	 * The main constructor for the speedtest result
+	 * @param download
+	 * @param upload
+	 * @param ping
+	 */
 	public SpeedTestRequest(String download, String upload, String ping) {
 		this.download = download.replace(".", "");
 		this.upload = upload.replace(".", "");
@@ -41,6 +73,9 @@ public class SpeedTestRequest {
 		this.serverId = ss.getClosestServer();
 	}
 
+	/**
+	 * Show and display the spoofed result received from www.speedtest.net
+	 */
 	public void displayResult() {
 		JFrame frame = new JFrame("Your Speedtest result");
 		frame.setSize(325, 235);
@@ -77,6 +112,11 @@ public class SpeedTestRequest {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Gets the speedtest image showing ping, download, upload and other
+	 * information
+	 * @return the image
+	 */
 	private ImageIcon getResultImage() {
 		try {
 			return new ImageIcon(new URL(getResultURL()));
@@ -85,6 +125,10 @@ public class SpeedTestRequest {
 		}
 	}
 
+	/**
+	 * Sends the request containing the spoofed information.
+	 * @return the url
+	 */
 	private String getResultURL() {
 		try {
 			URL url = new URL("http://www.speedtest.net/api/api.php");

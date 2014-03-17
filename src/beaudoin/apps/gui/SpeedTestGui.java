@@ -1,3 +1,26 @@
+/**
+ *  The MIT License (MIT)
+ * 	
+ *  Copyright (c) 2014 Jonathan Beaudoin
+ *	
+ *	Permission is hereby granted, free of charge, to any person obtaining a copy
+ *	of this software and associated documentation files (the "Software"), to deal
+ *	in the Software without restriction, including without limitation the rights
+ *	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *	copies of the Software, and to permit persons to whom the Software is
+ *	furnished to do so, subject to the following conditions:
+ *	
+ *	The above copyright notice and this permission notice shall be included in all
+ *	copies or substantial portions of the Software.
+ *	
+ *	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *	SOFTWARE.
+ */
 package beaudoin.apps.gui;
 
 import java.awt.Font;
@@ -12,13 +35,24 @@ import javax.swing.JOptionPane;
 import beaudoin.apps.gui.children.input.NumericalInput;
 import beaudoin.apps.http.SpeedTestRequest;
 
+/**
+ * 
+ * @author Jonathan
+ * @since March 14th, 2014
+ */
 public class SpeedTestGui extends JFrame {
 
 	private static final long serialVersionUID = -5007568166176969267L;
 
-	public JButton requestButton;
-	public NumericalInput download, upload, ping;
+	/**
+	 * Variables used throughout the class
+	 */
+	private JButton requestButton;
+	private NumericalInput download, upload, ping;
 
+	/**
+	 * Main construction of the GUI
+	 */
 	public SpeedTestGui() {
 		setSize(282, 218);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,6 +112,10 @@ public class SpeedTestGui extends JFrame {
 		});
 	}
 
+	/**
+	 * Checks to see if the formats are proper, and enables the 
+	 * request button if it passes the test(s)
+	 */
 	public void checkForActivation() {
 		NumericalInput[] numericalInputs = { download, upload, ping };
 		boolean b = true;
